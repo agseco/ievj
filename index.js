@@ -1,3 +1,7 @@
+const regex = '\\$\\{env\\.(.*?)\\}';
+const globalRegex = new RegExp(regex, 'g');
+const tokenRegex = new RegExp(regex);
+
 /**
  * Replaces arbitrary environment variables (those in `process.env`) in the given object as argument. The place holders
  * are expected in the following format: `${env.NAME_OF_THE_ENV_VAR}`.
@@ -8,10 +12,6 @@
  * @param {Boolean} strict strict evaluation or not - if true and any variable could not be replaced, an error will be thrown
  */
 function interpolateEnvVars(object, strict = false) {
-  const regex = '\\$\\{env\\.(.*?)\\}';
-  const globalRegex = new RegExp(regex, 'g');
-  const tokenRegex = new RegExp(regex);
-
   let asString = JSON.stringify(object);
   const matches = asString.match(globalRegex);
 
@@ -26,7 +26,6 @@ function interpolateEnvVars(object, strict = false) {
         if (envVarValue) {
           // Replace all occurrences of the variable with a regex
           const replaceRegex = new RegExp(`\\$\\{env\\.${envVarName}\\}`, 'g');
-          console.log(replaceRegex);
           asString = asString.replace(replaceRegex, envVarValue);
         }
 
