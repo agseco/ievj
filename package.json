@@ -1,0 +1,16 @@
+{
+  "name": "ievj",
+  "version": "0.0.1",
+  "description": "Interpolation of environment variables in a JSON",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": "git@github.com:agseco/ievj.git",
+  "author": "Alejandro Garcia Seco <ags@caravelo.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^6.1.2"
+  }
+}
