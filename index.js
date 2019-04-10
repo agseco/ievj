@@ -41,4 +41,4 @@ function interpolateEnvVars(object, strict = false) {
   return JSON.parse(asString);
 }
 
-module.exports = { interpolateEnvVars };
+module.exports = interpolateEnvVars;

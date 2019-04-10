@@ -2,7 +2,7 @@
 
 const expect = require('chai').expect;
 
-const interpolateEnvVars = require('../index.js').interpolateEnvVars;
+const interpolateEnvVars = require('../index.js');
 
 describe('interpolateEnvVars()', () => {
   before(function() {
