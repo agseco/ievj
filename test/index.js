@@ -6,23 +6,23 @@ const interpolateEnvVars = require('../index.js').interpolateEnvVars;
 
 describe('interpolateEnvVars()', () => {
   before(function() {
-    process.env.REPEATS = 'interpolated multiple times';
-    process.env.UNIQUE = 'interpolated once';
+    process.env.MANY = 'interpolated MANY times';
+    process.env.ONCE = 'interpolated ONCE';
   });
 
   after(function() {
-    delete process.env.REPEATS;
-    delete process.env.UNIQUE;
+    delete process.env.MANY;
+    delete process.env.ONCE;
   });
 
   it('should work', () => {
     const object = {
       a: 'a',
-      b: '${env.REPEATS}',
+      b: '${env.MANY}',
       c: {
-        a: '${env.UNIQUE}',
+        a: '${env.ONCE}',
         b: {
-          a: '${env.REPEATS}',
+          a: '${env.MANY}',
           b: '${env.MISSING}'
         }
       }
@@ -30,9 +30,9 @@ describe('interpolateEnvVars()', () => {
 
     const result = interpolateEnvVars(object);
     expect(result.a).to.equal('a');
-    expect(result.b).to.equal(process.env.REPEATS);
-    expect(result.c.a).to.equal(process.env.UNIQUE);
-    expect(result.c.b.a).to.equal(process.env.REPEATS);
+    expect(result.b).to.equal(process.env.MANY);
+    expect(result.c.a).to.equal(process.env.ONCE);
+    expect(result.c.b.a).to.equal(process.env.MANY);
     expect(result.c.b.b).to.equal('${env.MISSING}');
 
     expect(() => interpolateEnvVars(object, true)).to.throw('Some environment variables could not be replaced');

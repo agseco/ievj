@@ -8,20 +8,29 @@
  * @param {Boolean} strict strict evaluation or not - if true and any variable could not be replaced, an error will be thrown
  */
 function interpolateEnvVars(object, strict = false) {
-  const regex = '\\$\\{env\\.(.*?)\\}'; // Escaping the escaped :D
+  const regex = '\\$\\{env\\.(.*?)\\}';
   const globalRegex = new RegExp(regex, 'g');
-  const localRegex = new RegExp(regex);
+  const tokenRegex = new RegExp(regex);
 
   let asString = JSON.stringify(object);
   const matches = asString.match(globalRegex);
 
   if (matches) {
-    // TODO: process each token once and replace all in string
+    const processedTokens = [];
+
     for (let token of matches) {
-      const envVarName = token.match(localRegex)[1];
-      const envVarValue = process.env[envVarName];
-      if (envVarValue) {
-        asString = asString.replace(token, envVarValue);
+      if (!processedTokens.includes(token)) {
+        const envVarName = token.match(tokenRegex)[1];
+        const envVarValue = process.env[envVarName];
+
+        if (envVarValue) {
+          // Replace all occurrences of the variable with a regex
+          const replaceRegex = new RegExp(`\\$\\{env\\.${envVarName}\\}`, 'g');
+          console.log(replaceRegex);
+          asString = asString.replace(replaceRegex, envVarValue);
+        }
+
+        processedTokens.push(token);
       }
     }
   }
