@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.com/agseco/ievj.svg?branch=master)](https://travis-ci.com/agseco/ievj)
+[![npm version](https://badge.fury.io/js/%40agseco%2Fievj.svg)](https://badge.fury.io/js/%40agseco%2Fievj)
 
 # ievj
 Interpolation or replacement of environment variables in a JSON.
