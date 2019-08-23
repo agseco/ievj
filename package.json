@@ -1,6 +1,6 @@
 {
   "name": "@agseco/ievj",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Interpolation of environment variables in a JSON",
   "main": "index.js",
   "scripts": {
